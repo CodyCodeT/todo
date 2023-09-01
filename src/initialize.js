@@ -1,4 +1,5 @@
 import sidebarInterface from "./sidebarInterface";
+import todoLoader from "./todoLoader";
 
 export default function initialize(projectListArray) {
   const container = document.querySelector("#container");
@@ -18,4 +19,6 @@ export default function initialize(projectListArray) {
   container.appendChild(sidebar);
   container.appendChild(newProject);
   sidebarInterface(projectListArray);
+  todos.innerHTML = ''
+  todoLoader(projectListArray, 0);
 }

@@ -87,6 +87,18 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
+.todobox {
+    width: 450px;
+    height: 300px;
+    padding: 15px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #c1c1c1;
+}
 .sidebarelement {
     background: none;
     border: none;

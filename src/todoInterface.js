@@ -1,4 +1,5 @@
-import todoCreate from "./todoCreate.js";
+import todoFactory from "./todoFactory.js";
+import todoLoader from "./todoLoader.js";
 
 export default function toDo(projectListArray) {
   const title = document.createElement("input");
@@ -9,6 +10,7 @@ export default function toDo(projectListArray) {
   const submit = document.createElement("button");
   const todoForm = document.createElement("form");
   const projectList = document.createElement("select");
+  const todos = document.querySelector('#todos')
 
   container.style.display = "flex";
 
@@ -35,7 +37,7 @@ export default function toDo(projectListArray) {
 
   submit.addEventListener("click", (e) => {
     e.preventDefault();
-    const createTodo = new todoCreate(
+    const createTodo = new todoFactory(
       title.value,
       description.value,
       dueDate.value,
@@ -43,6 +45,8 @@ export default function toDo(projectListArray) {
       projectList.value,
       projectListArray
     );
+    todos.innerHTML = ''
+    todoLoader(projectListArray, projectList.value)
     container.style.display = "none";
     const newTodoButton = document.querySelector("#newtodo");
     const newProjectButton = document.querySelector("#newproject");

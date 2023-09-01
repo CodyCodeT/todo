@@ -20,6 +20,3 @@ newProject.addEventListener("click", function () {
   newTodoForm.disabled = true
   newProject.disabled = true
 });
-
-console.table(projectListArray);
-//Write a function that handles the creation of an array of arrays that can hold project data

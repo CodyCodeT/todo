@@ -1,5 +1,5 @@
 
-export default function todoCreate(title, description, dueDate, priority, projectNo, projectListArray) {
+export default function todoFactory(title, description, dueDate, priority, projectNo, projectListArray) {
     this.title = title
     this.description = description
     this.dueDate = dueDate
