@@ -5,7 +5,6 @@ export default function todoFactory(title, description, dueDate, priority, proje
     this.dueDate = dueDate
     this.priority = priority
     projectListArray[`${projectNo}`].todos.push(this);
-    console.table(projectListArray[`${projectNo}`].todos);
 };
 
 //need to define defaultProject at index.js and somehow get the value to have permanance

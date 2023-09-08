@@ -1,11 +1,14 @@
 import initialize from "./initialize.js";
-import toDo from "./todoInterface.js";
+import toDo from "./todoForm.js";
 import projectInterface from "./projectInterface.js";
+import todoFactory from "./todoFactory.js";
 import css from "./style.css";
 
 var projectListArray = [{ name: "default", todos: [] }];
 //title, description, dueDate, priority
-
+// for (let i = 0; i < 5; i++) {
+//   const todo = new todoFactory('test', '', new Date(), 1, 0, projectListArray)
+// }
 initialize(projectListArray);
 
 const newTodoForm = document.querySelector("#newtodo");
@@ -42,3 +45,5 @@ newProject.addEventListener("click", function () {
   }
 })
 });
+
+

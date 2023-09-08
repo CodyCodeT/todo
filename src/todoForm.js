@@ -2,44 +2,56 @@ import todoFactory from "./todoFactory.js";
 import todoLoader from "./todoLoader.js";
 
 export default function toDo(projectListArray) {
-  const title = document.createElement("input");
+  //main element creation
   const container = document.querySelector("#formcontainer");
-  const description = document.createElement("input");
-  const dueDate = document.createElement("input");
+  container.style.display = "flex";
+  const title = document.createElement("input");
+  const description = document.createElement("textarea");
   const priority = document.createElement("select");
   const submit = document.createElement("button");
   const todoForm = document.createElement("form");
   const projectList = document.createElement("select");
   const todos = document.querySelector("#todos");
 
-  container.style.display = "flex";
-
   title.placeholder = "Title";
   description.placeholder = "Description";
-  dueDate.placeholder = "Due Date";
+  description.id = 'description'
   priority.placeholder = "Priority";
   submit.textContent = "Submit";
+  submit.type = 'submit'
+
+  //the default project is defined here
 
   const selectedProject = document.querySelector("#selected");
   const firstOption = document.createElement("option");
-  if (selectedProject != null && selectedProject.textContent != 'All') {
+  if (selectedProject != null && selectedProject.textContent != "All") {
     firstOption.textContent = selectedProject.textContent;
     firstOption.value = selectedProject.value;
     projectList.appendChild(firstOption);
   }
 
-//priorities are handled here
+  //dates are handled here
+
+  const dueDate = document.createElement("input");
+  const dateLabel = document.createElement("label");
+  dueDate.id = "duedate";
+  dateLabel.htmlFor = "duedate";
+  dateLabel.textContent = "Due Date";
+  dueDate.type = "date";
+  dueDate.required = true;
+
+  //priorities are handled here
 
   const highPriority = document.createElement("option");
   highPriority.textContent = "High Priority";
-  highPriority.value = 2
+  highPriority.value = 2;
   const normalPriority = document.createElement("option");
   normalPriority.textContent = "Normal Priority";
-  normalPriority.value = 1
-  normalPriority.selected = true
+  normalPriority.value = 1;
+  normalPriority.selected = true;
   const lowPriority = document.createElement("option");
   lowPriority.textContent = "Low Priority";
-  lowPriority.value = 0
+  lowPriority.value = 0;
 
   for (let i = 0; i < projectListArray.length; i++) {
     var option = document.createElement("option");
@@ -50,6 +62,7 @@ export default function toDo(projectListArray) {
 
   todoForm.appendChild(title);
   todoForm.appendChild(description);
+  todoForm.appendChild(dateLabel);
   todoForm.appendChild(dueDate);
 
   todoForm.appendChild(priority);
@@ -61,7 +74,7 @@ export default function toDo(projectListArray) {
   todoForm.appendChild(submit);
   container.appendChild(todoForm);
 
-  submit.addEventListener("click", (e) => {
+  todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const createTodo = new todoFactory(
       title.value,
@@ -71,17 +84,6 @@ export default function toDo(projectListArray) {
       projectList.value,
       projectListArray
     );
-
-    document.addEventListener('keydown', (e) => {
-      console.log(e.key);
-      if (e.key === 'Escape' && newTodoButton.disabled == true) {
-        todoLoader(projectListArray, selectedProject)
-        console.log('object');
-      } else { 
-        return
-      }
-    })
-    
     todos.innerHTML = "";
     todoLoader(projectListArray, projectList.value);
     container.style.display = "none";
@@ -91,7 +93,4 @@ export default function toDo(projectListArray) {
     newProjectButton.disabled = false;
     container.innerHTML = "";
   });
-
-
 }
-
