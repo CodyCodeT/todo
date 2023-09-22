@@ -1,5 +1,14 @@
 import todoFactory from "./todoFactory.js";
 import todoLoader from "./todoLoader.js";
+import format from "date-fns/format";
+
+//we could instead feed an edit value and make an if function 
+//'if (edit == '') {
+//  submit the standard form
+// } else {
+//  populate and submit the edit form
+// }
+//probably easier to write a function to handle the separate
 
 export default function toDo(projectListArray) {
   //main element creation
@@ -15,10 +24,10 @@ export default function toDo(projectListArray) {
 
   title.placeholder = "Title";
   description.placeholder = "Description";
-  description.id = 'description'
+  description.classList = "description";
   priority.placeholder = "Priority";
   submit.textContent = "Submit";
-  submit.type = 'submit'
+  submit.type = "submit";
 
   //the default project is defined here
 
@@ -64,22 +73,27 @@ export default function toDo(projectListArray) {
   todoForm.appendChild(description);
   todoForm.appendChild(dateLabel);
   todoForm.appendChild(dueDate);
-
   todoForm.appendChild(priority);
+  todoForm.appendChild(projectList);
+  todoForm.appendChild(submit);
+
+
   priority.appendChild(highPriority);
   priority.appendChild(normalPriority);
   priority.appendChild(lowPriority);
 
-  todoForm.appendChild(projectList);
-  todoForm.appendChild(submit);
+
   container.appendChild(todoForm);
 
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    var dateDue = new Date(dueDate.value)
+    dateDue = format(dateDue, 'yyyy-MM-dd')
+    console.log(dateDue);
     const createTodo = new todoFactory(
       title.value,
       description.value,
-      dueDate.value,
+      dateDue,
       priority.value,
       projectList.value,
       projectListArray

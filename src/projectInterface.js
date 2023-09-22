@@ -12,12 +12,13 @@ export default function projectInterface(projectListArray) {
   
   submit.textContent = "Submit";
   projectName.placeholder = "New Project Name";
+  projectName.maxLength = 15
   
   container.appendChild(form);
   form.appendChild(projectName);
   form.appendChild(submit);
 
-  submit.addEventListener("click", (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     projectCreate(projectName.value, projectListArray);
     const newProjectButton = document.querySelector('#newproject')
